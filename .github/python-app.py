@@ -7,7 +7,7 @@ from productos import productos
 
 @app.route('/')
 def hola():
-    return "grupo 3"
+    return "grupo 3-A"
 
 @app.route('/lista')
 def lista():
