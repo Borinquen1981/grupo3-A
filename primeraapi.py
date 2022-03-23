@@ -38,20 +38,18 @@ def getvideoconsola(consola_name):
         return jsonify({"Video juegos": consola1})
     return jsonify({"Mensaje": "No existen video juegos para la consola"})
 
-@app.route('/videojuegos', methods=['POST'])
+@app.route('/nuevojuego', methods=['POST'])
 def addvideo():
-    # print(request.json)
     new_juego = {
+        "codigo": request.json['codigo'],
         "name": request.json['name'],
         "precio": request.json['precio'],
-        "cantidad": request.json['cantidad']
+        "cantidad": request.json['cantidad'],
+        "consola": request.json['consola']
     }
+    print (new_juego)
     videojuegos.append(new_juego)
-    # return 'recibido'
     return jsonify({"message": "videojuego agregado", 'videojuegos': videojuegos})
-
-
-# actualizar dato
 
 @app.route('/videojuegos/<string:videojuego_name>', methods=['PUT'])
 def editvideo(videojuego_name):
