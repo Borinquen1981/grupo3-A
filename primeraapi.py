@@ -51,22 +51,20 @@ def addvideo():
     videojuegos.append(new_juego)
     return jsonify({"message": "videojuego agregado", 'videojuegos': videojuegos})
 
-@app.route('/videojuegos/<string:videojuego_name>', methods=['PUT'])
-def editvideo(videojuego_name):
-    actual = [video for video in videojuegos if video['codigo'] == videojuego_name]
+@app.route('/actualizarjuego/<int:videojuego_codigo>', methods=['PUT'])
+def editvideo(videojuego_codigo):
+    actual = [video for video in videojuegos if video['codigo'] == videojuego_codigo]
     if len(actual) > 0:
         actual[0]['codigo'] = request.json['codigo'],
         actual[0]['name'] = request.json['name'],
         actual[0]['precio'] = request.json['precio'],
-        actual[0]['cantidad'] = request.json['cantidad']
+        actual[0]['cantidad'] = request.json['cantidad'],
+        actual[0]['consola'] = request.json['consola']
         return jsonify({
             "message": "videojuego actualizado",
             "videojuegos": actual[0]
         })
     return jsonify({"message": "videojuego no encontrado"})
-
-
-# metodo delete
 
 @app.route('/videojuegos/<string:videojuego_name>', methods=['DELETE'])
 def deletevideo(videojuego_name):
