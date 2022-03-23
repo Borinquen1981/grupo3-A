@@ -66,9 +66,9 @@ def editvideo(videojuego_codigo):
         })
     return jsonify({"message": "videojuego no encontrado"})
 
-@app.route('/videojuegos/<string:videojuego_name>', methods=['DELETE'])
-def deletevideo(videojuego_name):
-    eliminarvideo = [video for video in videojuegos if video['name'] == videojuego_name]
+@app.route('/eliminarjuego/<int:videojuego_codigo>', methods=['DELETE'])
+def deletevideo(videojuego_codigo):
+    eliminarvideo = [video for video in videojuegos if video['codigo'] == videojuego_codigo]
     if len(eliminarvideo) > 0:
         videojuegos.remove(eliminarvideo[0])
         return jsonify({
