@@ -18,6 +18,7 @@ def getProdu():
 
 @app.route('/videojuegos/<string:videojuego_name>', methods=['GET'])
 def getvideo(videojuego_name):
+
     catalogo = [video for video in videojuegos if video['name'] == videojuego_name.lower()]
     if len(catalogo) > 0:
         return jsonify({"videojuegos": catalogo[0]})
@@ -26,11 +27,16 @@ def getvideo(videojuego_name):
 
 @app.route('/consola/<string:consola_name>', methods=['GET'])
 def getvideoconsola(consola_name):
-    catalogo = [video for video in videojuegos if video['consola'] == consola_name.lower()]
-    if len(catalogo) > 0:
-        return jsonify({"videojuegos": catalogo[0]})
-    return jsonify({"message": "videojuego no encontrado"})
-
+    consola1=[]
+    for juego in videojuegos:
+        if  juego['consola'] == consola_name.lower():
+            juego_aux=juego
+            consola1.append(juego_aux)
+        else:
+            print("no coincide")
+    if len(consola1) > 0:
+        return jsonify({"Video juegos": consola1})
+    return jsonify({"Mensaje": "No existen video juegos para la consola"})
 
 @app.route('/videojuegos', methods=['POST'])
 def addvideo():
